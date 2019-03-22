@@ -18,24 +18,22 @@
 <div class="container">
 
     <!--navigation bar-->
-    <nav class="amber lighten-3">
+    <nav class="grey darken-3">
         <div class="nav-wrapper">
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <img src="images/nasa-logo-web-rgb.webp" style="height: 90%">
             <ul class="right hide-on-med-and-down">
-                <li><a style="color: darkblue" href="#l1">About</a></li>
-                <li><a style="color: darkblue" href="#l2">Feedback</a></li>
-                <li><a style="color: darkblue" href="#">Media</a></li>
-                <li><a style="color: darkblue" href="#">Contacts</a></li>
+                <li><a href="#l1">About</a></li>
+                <li><a href="#l2">Get In Touch</a></li>
+                <li><a href="#l3">Contacts</a></li>
             </ul>
         </div>
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
         <li><a href="#l1">About</a></li>
-        <li><a href="#l2">Feedback</a></li>
-        <li><a href="#">Media</a></li>
-        <li><a href="#">Contacts</a></li>
+        <li><a href="#l2">Get In Touch</a></li>
+        <li><a href="#l3">Contacts</a></li>
     </ul>
 
     <!--content-->
@@ -50,7 +48,7 @@
     <div class="row" id="l1">
         <div class="col s12 m4">
             <div>
-                <img src="images/icon1.jpg" class="icon-planet">
+                <img src="images/icon-1.jpg" class="icon-planet">
             </div>
             <div>
                 <h5>Earth</h5>
@@ -61,7 +59,7 @@
         </div>
         <div class="col s12 m4">
             <div>
-                <img src="images/icon2.jpg" class="icon-planet">
+                <img src="images/icon-2.jpg" class="icon-planet">
             </div>
             <div>
                 <h5>Humans in space</h5>
@@ -72,7 +70,7 @@
         </div>
         <div class="col s12 m4">
             <div>
-                <img src="images/icon3.jpg" class="icon-planet">
+                <img src="images/icon-3.jpg" class="icon-planet">
             </div>
             <div>
                 <h5>Moon to Mars</h5>
@@ -83,12 +81,16 @@
     </div>
 
     <div class="divider"></div>
-    <h4 id="l2">Feedback</h4>
+    <h4 id="l2">Get In Touch</h4>
     <form class="col s12">
         <div class="row">
             <div class="input-field col s6">
-                <input placeholder="Your name" id="first_name" type="text" class="validate">
-                <label for="first_name">Enter Name</label>
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Last Name</label>
             </div>
         </div>
     </form>
@@ -96,11 +98,24 @@
         <div class="row">
             <div class="input-field col s12">
                 <textarea id="textarea1" class="materialize-textarea"></textarea>
-                <label for="textarea1">Textarea</label>
+                <label for="textarea1">Leave your message</label>
             </div>
         </div>
     </form>
 
+    <div class="divider"></div>
+    <div class="row" id="l3">
+        <h4>Contacts</h4>
+        <div class="col s5 m4 l2" style="padding: 0"><img src="images/nasa-logo-web-rgb.webp" style="width: 100%"></div>
+        <div class="col s7 m8 l10">
+            <p>NASA Headquarters
+                <br>300 E. Street SW, Suite 5R30
+                <br>Washington, DC 20546
+                <br>(202) 358-0001 (Office)
+                <br>(202) 358-4338 (Fax)</p>
+        </div>
+    </div>
+    <div class="row s12 grey darken-3 full"><p class="center-align">copyright 2019</p></div>
 
 </div>
 
