@@ -1,5 +1,9 @@
 $(document).ready(function(){
-    $('.sidenav').sidenav();
+    $('.sidenav')
+        .sidenav()
+        .on('click tap', 'li a', () => {
+            $('.sidenav').sidenav('close');
+        });
 });
 
 $('#textarea1').val('');
