@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>ЛР2</title>
 </head>
 <body>
@@ -14,15 +20,23 @@
     <!--navigation bar-->
     <nav class="amber lighten-3">
         <div class="nav-wrapper">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <img src="images/nasa-logo-web-rgb.webp" style="height: 90%">
             <ul class="right hide-on-med-and-down">
                 <li><a style="color: darkblue" href="#l1">About</a></li>
-                <li><a style="color: darkblue" href="#">Events</a></li>
+                <li><a style="color: darkblue" href="#l2">Feedback</a></li>
                 <li><a style="color: darkblue" href="#">Media</a></li>
                 <li><a style="color: darkblue" href="#">Contacts</a></li>
             </ul>
         </div>
     </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#l1">About</a></li>
+        <li><a href="#l2">Feedback</a></li>
+        <li><a href="#">Media</a></li>
+        <li><a href="#">Contacts</a></li>
+    </ul>
 
     <!--content-->
     <div class="row">
@@ -69,8 +83,32 @@
     </div>
 
     <div class="divider"></div>
-    <div class="row"> content</div>
+    <h4 id="l2">Feedback</h4>
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input placeholder="Your name" id="first_name" type="text" class="validate">
+                <label for="first_name">Enter Name</label>
+            </div>
+        </div>
+    </form>
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Textarea</label>
+            </div>
+        </div>
+    </form>
+
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+</script>
+
 </body>
 </html>
