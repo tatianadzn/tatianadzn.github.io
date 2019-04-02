@@ -8,24 +8,26 @@ function createCanvas(){
 }
 
 
+
 canvas = createCanvas();
 ctx = canvas.getContext('2d');
 
-pic1 = new Image();
-pic2 = new Image();
-pic3 = new Image();
-pic4 = new Image();
-pic1.src = 'https://source.unsplash.com/collection/1127168/200x200';
-pic2.src = 'https://source.unsplash.com/collection/1127164/200x200';
-pic3.src = 'https://source.unsplash.com/collection/1127163/200x200';
-pic4.src = 'https://source.unsplash.com/collection/1127165/200x200';
+let pic1 = new Image(), pic2 = new Image(), pic3 = new Image(), pic4 = new Image();
+
+pic1.width = getRndSize();
+pic1.height = getRndSize();
+pic1.src = 'https://source.unsplash.com/collection/1127163/' + pic1.width + 'x' + pic1.height;
+pic2.src = 'https://source.unsplash.com/collection/1127168/' + (canvas.width-pic1.width) + 'x' + pic1.height;
+pic3.src = 'https://source.unsplash.com/collection/1127170/' + pic1.width + 'x' + (canvas.height-pic1.height);
+pic4.src = 'https://source.unsplash.com/collection/1127176/' + (canvas.width-pic1.width) + 'x' + (canvas.height-pic1.height);
+
 
 function callbackFunction(result){
     window.onload = function () {
-        ctx.drawImage(pic1, 0, 0, 200, 200);
-        ctx.drawImage(pic2, 200, 0, 200, 200);
-        ctx.drawImage(pic3, 0, 200, 200, 200);
-        ctx.drawImage(pic4, 200, 200, 200, 200);
+        ctx.drawImage(pic1, 0, 0, pic1.width, pic1.height);
+        ctx.drawImage(pic2, pic1.width, 0, pic2.width, pic2.height);
+        ctx.drawImage(pic3, 0, pic1.height, pic3.width, pic3.height);
+        ctx.drawImage(pic4, pic1.width, pic1.height, pic4.width, pic4.height);
         ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = "28px bold";
@@ -44,12 +46,12 @@ text.then(callbackFunction);
 
 function wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight)
 {
-    var words = text.split(" ");
-    var countWords = words.length;
-    var line = "";
-    for (var n = 0; n < countWords; n++) {
-        var testLine = line + words[n] + " ";
-        var testWidth = context.measureText(testLine).width;
+    const words = text.split(" ");
+    let countWords = words.length;
+    let line = "";
+    for (let n = 0; n < countWords; n++) {
+        let testLine = line + words[n] + " ";
+        let testWidth = context.measureText(testLine).width;
         if (testWidth > maxWidth) {
             context.fillText(line, marginLeft, marginTop);
             line = words[n] + " ";
@@ -60,4 +62,10 @@ function wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight)
         }
     }
     context.fillText(line, marginLeft, marginTop);
+}
+
+
+function getRndSize() {
+    const numPool = [ 150, 200, 250];
+    return numPool[Math.floor(Math.random() * numPool.length)];
 }
