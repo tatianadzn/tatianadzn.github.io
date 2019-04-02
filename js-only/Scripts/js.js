@@ -17,11 +17,13 @@ pic.src = 'https://source.unsplash.com/collection/1127163/400x400';
 function callbackFunction(result){
     pic.onload = function () {
         ctx.drawImage(pic, 0, 0, canvas.width, canvas.height);
-        ctx.font = "25px serif";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.font = "28px bold";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        wrapText(ctx, result.quoteText, 200, 200, 300, 25);
+        wrapText(ctx, result.quoteText, 200, 150, 360, 28);
     };
 }
 
