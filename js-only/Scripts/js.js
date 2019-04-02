@@ -11,13 +11,22 @@ function createCanvas(){
 canvas = createCanvas();
 ctx = canvas.getContext('2d');
 
-pic = new Image();
-pic.src = 'https://source.unsplash.com/collection/1127163/400x400';
+pic1 = new Image();
+pic2 = new Image();
+pic3 = new Image();
+pic4 = new Image();
+pic1.src = 'https://source.unsplash.com/collection/1127168/200x200';
+pic2.src = 'https://source.unsplash.com/collection/1127164/200x200';
+pic3.src = 'https://source.unsplash.com/collection/1127163/200x200';
+pic4.src = 'https://source.unsplash.com/collection/1127165/200x200';
 
 function callbackFunction(result){
-    pic.onload = function () {
-        ctx.drawImage(pic, 0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+    window.onload = function () {
+        ctx.drawImage(pic1, 0, 0, 200, 200);
+        ctx.drawImage(pic2, 200, 0, 200, 200);
+        ctx.drawImage(pic3, 0, 200, 200, 200);
+        ctx.drawImage(pic4, 200, 200, 200, 200);
+        ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = "28px bold";
         ctx.fillStyle = "white";
