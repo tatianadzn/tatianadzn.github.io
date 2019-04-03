@@ -1,7 +1,11 @@
 canvas = createCanvas();
 ctx = canvas.getContext('2d');
-
 let pic1 = new Image(), pic2 = new Image(), pic3 = new Image(), pic4 = new Image();
+pic1.crossOrigin = 'Anonymous';
+pic2.crossOrigin = 'Anonymous';
+pic3.crossOrigin = 'Anonymous';
+pic4.crossOrigin = 'Anonymous';
+const waitLoadPics = waitPic([pic1, pic2, pic3, pic4]);
 
 pic1.width = getRndSize();
 pic1.height = getRndSize();
@@ -11,6 +15,18 @@ pic3.src = 'https://source.unsplash.com/collection/1127170/' + pic1.width + 'x' 
 pic4.src = 'https://source.unsplash.com/collection/1127176/' + (canvas.width-pic1.width) + 'x' + (canvas.height-pic1.height);
 
 sentAJAXreq();
+
+let saveButton = document.createElement("button");
+document.body.appendChild(saveButton);
+saveButton.textContent = "Download";
+saveButton.style.width = "400px";
+saveButton.style.display = "block";
+saveButton.onclick = function () {
+    let ahref = document.createElement("a");
+    ahref.href = canvas.toDataURL("image/png");
+    ahref.download = "image.png";
+    ahref.click();
+};
 
 //functions
 function createCanvas(){
@@ -22,25 +38,36 @@ function createCanvas(){
     return canvas;
 }
 
-function callbackFunction(result){
+async function callbackFunction(result){
     if (result.quoteText.split(" ").length > 20){
         sentAJAXreq();
         return 0;
     }
-    window.onload = function () {
-        ctx.drawImage(pic1, 0, 0, pic1.width, pic1.height);
-        ctx.drawImage(pic2, pic1.width, 0, pic2.width, pic2.height);
-        ctx.drawImage(pic3, 0, pic1.height, pic3.width, pic3.height);
-        ctx.drawImage(pic4, pic1.width, pic1.height, pic4.width, pic4.height);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = "28px bold";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        wrapText(ctx, result.quoteText, 200, 360, 28);
-    };
+    await waitLoadPics;
+
+    ctx.drawImage(pic1, 0, 0, pic1.width, pic1.height);
+    ctx.drawImage(pic2, pic1.width, 0, pic2.width, pic2.height);
+    ctx.drawImage(pic3, 0, pic1.height, pic3.width, pic3.height);
+    ctx.drawImage(pic4, pic1.width, pic1.height, pic4.width, pic4.height);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "28px bold";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    wrapText(ctx, result.quoteText, 200, 360, 28);
 }
+
+function waitPic(pics) {
+    return Promise.all(
+        pics.map(pic => {
+            return new Promise(resolve => {
+                pic.onload = resolve;
+            })
+        })
+    )
+}
+
 
 function sentAJAXreq(){
     const text = $.ajax({
