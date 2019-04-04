@@ -1,0 +1,103 @@
+body {
+    width: 800px;
+    margin: auto;
+}
+
+div:not(.middle) {
+    border: 1px solid grey;
+    margin: 5px;
+}
+
+.middle {
+    width: 100%;
+    height: 300px;
+    display: flex;
+}
+
+.one {
+    width: calc(100% - 12px);
+    height: 20px;
+    background-color: thistle;
+}
+
+.two {
+    width: calc(100% - 259px);
+    background-color: lightblue;
+    float: left;
+}
+
+.two-first {
+    width: calc(100% - 12px);
+    height: calc(20% - 12px);
+    background-color: white;
+    float: left;
+}
+
+.two-second {
+    width: calc(100% - 12px);
+    height: calc(80% - 12px);
+    background-color: ivory;
+    float: left;
+}
+
+.three {
+    width: 250px;
+    background-color: lavenderblush;
+    float: left;
+    margin: 0;
+}
+
+.four {
+    width: calc(100% - 12px);
+    height: 30px;
+    background-color: lavender;
+    float: left;
+}
+
+@media (max-width: 900px) {
+    body {
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .one, .four {
+        width: calc(500px - 12px);
+    }
+
+    .middle {
+        width: 500px;
+    }
+
+    .two {
+        width: calc(100% - 259px);
+    }
+
+    .three {
+        width: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    .one, .four {
+        width: calc(250px - 12px);
+    }
+
+    .middle {
+        width: 250px;
+        flex-wrap: wrap;
+        height: 600px;
+    }
+
+    .two {
+        width: calc(250px - 12px);
+    }
+
+    .three {
+        width: 250px;
+    }
+}
