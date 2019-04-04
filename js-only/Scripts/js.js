@@ -9,12 +9,14 @@ const waitLoadPics = waitPic([pic1, pic2, pic3, pic4]);
 
 pic1.width = getRndSize();
 pic1.height = getRndSize();
-pic1.src = 'https://source.unsplash.com/collection/1127163/' + pic1.width + 'x' + pic1.height;
-pic2.src = 'https://source.unsplash.com/collection/1127168/' + (canvas.width-pic1.width) + 'x' + pic1.height;
-pic3.src = 'https://source.unsplash.com/collection/1127170/' + pic1.width + 'x' + (canvas.height-pic1.height);
-pic4.src = 'https://source.unsplash.com/collection/1127176/' + (canvas.width-pic1.width) + 'x' + (canvas.height-pic1.height);
+pic2.width = canvas.width - pic1.width;
+pic2.height = pic1.height;
+pic3.width = pic1.width;
+pic3.height = canvas.height - pic1.height;
+pic4.width = pic2.width;
+pic4.height = pic3.height;
 
-sentAJAXreq();
+sentAJAXreqPic();
 
 let saveButton = document.createElement("button");
 document.body.appendChild(saveButton);
@@ -38,24 +40,17 @@ function createCanvas(){
     return canvas;
 }
 
-async function callbackFunction(result){
+function callbackFunctionQuote(result){
     if (result.quoteText.split(" ").length > 20){
-        sentAJAXreq();
+        sentAJAXreqQuote();
         return 0;
     }
-    await waitLoadPics;
 
-    ctx.drawImage(pic1, 0, 0, pic1.width, pic1.height);
-    ctx.drawImage(pic2, pic1.width, 0, pic2.width, pic2.height);
-    ctx.drawImage(pic3, 0, pic1.height, pic3.width, pic3.height);
-    ctx.drawImage(pic4, pic1.width, pic1.height, pic4.width, pic4.height);
-    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = "28px bold";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    wrapText(ctx, result.quoteText, 200, 360, 28);
+    textSeparator(ctx, result.quoteText, 200, 360, 28);
 }
 
 function waitPic(pics) {
@@ -69,15 +64,39 @@ function waitPic(pics) {
 }
 
 
-function sentAJAXreq(){
+function sentAJAXreqQuote(){
     const text = $.ajax({
         url: "https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=ru&jsonp=?",
         dataType: "jsonp",
     });
-    text.then(callbackFunction);
+    text.then(callbackFunctionQuote);
 }
 
-function wrapText(context, text, marginLeft, maxWidth, lineHeight)
+function sentAJAXreqPic(){
+   $.ajax({
+        url: "https://api.unsplash.com/photos/random?client_id=c5d7d717a09724e63caa42d78fb0a24e39c80d0e167118011b667e38152aa496&count=4",
+        dataType: "json",
+       type: "GET",
+   }).then(callbackFunctionPic);
+}
+
+async function callbackFunctionPic(result) {
+    pic1.src = result[0].urls.small;
+    pic2.src = result[1].urls.small;
+    pic3.src = result[2].urls.small;
+    pic4.src = result[3].urls.small;
+    await waitLoadPics;
+
+    ctx.drawImage(pic1, 0, 0);
+    ctx.drawImage(pic2, pic1.width, 0);
+    ctx.drawImage(pic3, 0, pic1.height);
+    ctx.drawImage(pic4, pic1.width, pic1.height);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    sentAJAXreqQuote();
+}
+
+function textSeparator(context, text, marginLeft, maxWidth, lineHeight)
 {
     const words = text.split(" ");
     let fulltext = [];
