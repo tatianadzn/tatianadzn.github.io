@@ -9,12 +9,6 @@ const waitLoadPics = waitPic([pic1, pic2, pic3, pic4]);
 
 pic1.width = getRndSize();
 pic1.height = getRndSize();
-pic2.width = canvas.width - pic1.width;
-pic2.height = pic1.height;
-pic3.width = pic1.width;
-pic3.height = canvas.height - pic1.height;
-pic4.width = pic2.width;
-pic4.height = pic3.height;
 
 sentAJAXreqPic();
 
@@ -45,7 +39,12 @@ function callbackFunctionQuote(result){
         sentAJAXreqQuote();
         return 0;
     }
-
+    ctx.drawImage(pic1, 0, 0);
+    ctx.drawImage(pic2, pic1.width, 0);
+    ctx.drawImage(pic3, 0, pic1.height);
+    ctx.drawImage(pic4, pic1.width, pic1.height);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = "28px bold";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
@@ -63,13 +62,11 @@ function waitPic(pics) {
     )
 }
 
-
 function sentAJAXreqQuote(){
-    const text = $.ajax({
+    $.ajax({
         url: "https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=ru&jsonp=?",
         dataType: "jsonp",
-    });
-    text.then(callbackFunctionQuote);
+    }).then(callbackFunctionQuote);
 }
 
 function sentAJAXreqPic(){
@@ -87,12 +84,6 @@ async function callbackFunctionPic(result) {
     pic4.src = result[3].urls.small;
     await waitLoadPics;
 
-    ctx.drawImage(pic1, 0, 0);
-    ctx.drawImage(pic2, pic1.width, 0);
-    ctx.drawImage(pic3, 0, pic1.height);
-    ctx.drawImage(pic4, pic1.width, pic1.height);
-    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     sentAJAXreqQuote();
 }
 
@@ -120,7 +111,6 @@ function textSeparator(context, text, marginLeft, maxWidth, lineHeight)
         context.fillText(fulltext[n], marginLeft, (marginTop+n*lineHeight));
     }
 }
-
 function getRndSize() {
     const numPool = [ 150, 200, 250];
     return numPool[Math.floor(Math.random() * numPool.length)];
