@@ -1,10 +1,6 @@
 canvas = createCanvas();
 ctx = canvas.getContext('2d');
 let pic1 = new Image(), pic2 = new Image(), pic3 = new Image(), pic4 = new Image();
-pic1.crossOrigin = 'Anonymous';
-pic2.crossOrigin = 'Anonymous';
-pic3.crossOrigin = 'Anonymous';
-pic4.crossOrigin = 'Anonymous';
 const waitLoadPics = waitPic([pic1, pic2, pic3, pic4]);
 
 pic1.width = getRndSize();
@@ -53,13 +49,13 @@ function callbackFunctionQuote(result){
 }
 
 function waitPic(pics) {
-    return Promise.all(
-        pics.map(pic => {
-            return new Promise(resolve => {
-                pic.onload = resolve;
-            })
-        })
-    )
+    return Promise.all(pics.map(setOnLoadPromise))
+}
+
+function setOnLoadPromise(pic) {
+    return new Promise(function(resolve) {
+        pic.onload = resolve;
+    })
 }
 
 function sentAJAXreqQuote(){
@@ -93,7 +89,6 @@ async function callbackFunctionPic(result) {
     pic3.src = result[2].urls.small;
     pic4.src = result[3].urls.small;
     await waitLoadPics;
-
     sentAJAXreqQuote();
 }
 
