@@ -1,6 +1,10 @@
 canvas = createCanvas();
 ctx = canvas.getContext('2d');
 let pic1 = new Image(), pic2 = new Image(), pic3 = new Image(), pic4 = new Image();
+pic1.crossOrigin = 'Anonymous';
+pic2.crossOrigin = 'Anonymous';
+pic3.crossOrigin = 'Anonymous';
+pic4.crossOrigin = 'Anonymous';
 const waitLoadPics = waitPic([pic1, pic2, pic3, pic4]);
 
 pic1.width = getRndSize();
