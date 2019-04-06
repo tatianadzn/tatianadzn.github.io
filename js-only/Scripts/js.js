@@ -66,15 +66,25 @@ function sentAJAXreqQuote(){
     $.ajax({
         url: "https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=ru&jsonp=?",
         dataType: "jsonp",
-    }).then(callbackFunctionQuote);
+        timeout: 1000
+    })
+        .done(callbackFunctionQuote)
+        .fail(function () {
+            alert("quote failed");
+        });
 }
 
 function sentAJAXreqPic(){
    $.ajax({
-        url: "https://api.unsplash.com/photos/random?client_id=c5d7d717a09724e63caa42d78fb0a24e39c80d0e167118011b667e38152aa496&count=4",
-        dataType: "json",
+       url: "https://api.unsplash.com/photos/random?client_id=c5d7d717a09724e63caa42d78fb0a24e39c80d0e167118011b667e38152aa496&count=4",
+       dataType: "json",
        type: "GET",
-   }).then(callbackFunctionPic);
+       timeout: 1000
+   })
+       .done(callbackFunctionPic)
+       .fail(function () {
+           alert("pics failed");
+       });
 }
 
 async function callbackFunctionPic(result) {
