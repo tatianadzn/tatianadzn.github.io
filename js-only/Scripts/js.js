@@ -1,5 +1,5 @@
-canvas = createCanvas();
-ctx = canvas.getContext('2d');
+let canvas = createCanvas(450, 450);
+let ctx = canvas.getContext('2d');
 let pic1 = new Image(), pic2 = new Image(), pic3 = new Image(), pic4 = new Image();
 pic1.crossOrigin = 'Anonymous';
 pic2.crossOrigin = 'Anonymous';
@@ -12,30 +12,30 @@ pic1.height = getRndSize();
 
 sentAJAXreqPic();
 
-let saveButton = document.createElement("button");
+let saveButton = document.createElement('button');
 document.body.appendChild(saveButton);
-saveButton.textContent = "Download";
-saveButton.style.width = "400px";
-saveButton.style.display = "block";
+saveButton.textContent = 'Download';
+saveButton.style.width = '450px';
+saveButton.style.display = 'block';
 saveButton.onclick = function () {
-    let ahref = document.createElement("a");
-    ahref.href = canvas.toDataURL("image/png");
-    ahref.download = "image.png";
+    let ahref = document.createElement('a');
+    ahref.href = canvas.toDataURL('image/png');
+    ahref.download = 'image.png';
     ahref.click();
 };
 
 //functions
-function createCanvas(){
+function createCanvas(width, height){
     let canvas = document.createElement('canvas');
     const body =  document.getElementsByTagName('body')[0];
     body.appendChild(canvas);
-    canvas.width = 400;
-    canvas.height = 400;
+    canvas.width = width;
+    canvas.height = height;
     return canvas;
 }
 
 function callbackFunctionQuote(result){
-    if (result.quoteText.split(" ").length > 20){
+    if (result.quoteText.split(' ').length > 20){
         sentAJAXreqQuote();
         return 0;
     }
@@ -43,13 +43,13 @@ function callbackFunctionQuote(result){
     ctx.drawImage(pic2, pic1.width, 0);
     ctx.drawImage(pic3, 0, pic1.height);
     ctx.drawImage(pic4, pic1.width, pic1.height);
-    ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "28px bold";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    textSeparator(ctx, result.quoteText, 200, 360, 28);
+    ctx.font = '28px bold';
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    textSeparator(ctx, result.quoteText, canvas.width/2, (canvas.width * 0.8), 28);
 }
 
 function waitPic(pics) {
@@ -64,26 +64,26 @@ function setOnLoadPromise(pic) {
 
 function sentAJAXreqQuote(){
     $.ajax({
-        url: "https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=ru&jsonp=?",
-        dataType: "jsonp",
+        url: 'https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=ru&jsonp=?',
+        dataType: 'jsonp',
         timeout: 1000
     })
         .done(callbackFunctionQuote)
         .fail(function () {
-            alert("quote failed");
+            alert('quote failed');
         });
 }
 
 function sentAJAXreqPic(){
    $.ajax({
-       url: "https://api.unsplash.com/photos/random?client_id=c5d7d717a09724e63caa42d78fb0a24e39c80d0e167118011b667e38152aa496&count=4",
-       dataType: "json",
-       type: "GET",
-       timeout: 1000
+       url: 'https://api.unsplash.com/photos/random?client_id=c5d7d717a09724e63caa42d78fb0a24e39c80d0e167118011b667e38152aa496&count=4',
+       dataType: 'json',
+       type: 'GET',
+       timeout: 10000
    })
        .done(callbackFunctionPic)
        .fail(function () {
-           alert("pics failed");
+           alert('pics failed');
        });
 }
 
@@ -98,16 +98,16 @@ async function callbackFunctionPic(result) {
 
 function textSeparator(context, text, marginLeft, maxWidth, lineHeight)
 {
-    const words = text.split(" ");
+    const words = text.split(' ');
     let fulltext = [];
     let countWords = words.length;
-    let line = "";
+    let line = '';
     let countlines = 0;
     for (let n = 0; n < countWords; n++) {
-        let testLine = line + words[n] + " ";
+        let testLine = line + words[n] + ' ';
         let testWidth = context.measureText(testLine).width;
         if (testWidth > maxWidth) {
-            line = words[n] + " ";
+            line = words[n] + ' ';
             countlines++;
         }
         else {
@@ -115,9 +115,9 @@ function textSeparator(context, text, marginLeft, maxWidth, lineHeight)
         }
         fulltext[countlines] = line;
     }
-    let marginTop = (canvas.height - lineHeight*countlines)/2 ;
+    let marginTop = (canvas.height - lineHeight * countlines) / 2 ;
     for (let n = 0; n < fulltext.length; n++){
-        context.fillText(fulltext[n], marginLeft, (marginTop+n*lineHeight));
+        context.fillText(fulltext[n], marginLeft, (marginTop + n * lineHeight));
     }
 }
 function getRndSize() {
