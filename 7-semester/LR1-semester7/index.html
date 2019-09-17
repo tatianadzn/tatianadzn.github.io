@@ -51,18 +51,16 @@
 
             city = document.getElementById('cityName').value;
 
-            try{
-                $.getJSON('https://api.openweathermap.org/data/2.5/weather?appid=f816129477a56b6c0840aa37d1e18cdc&?', {q: city}, function (cities) {
+            $.getJSON('https://api.openweathermap.org/data/2.5/weather?appid=f816129477a56b6c0840aa37d1e18cdc&?', {q: city}, function (cities) {
 
-                    let template = $("#mp_template").html();
+                let template = $("#mp_template").html();
 
-                    let text = Mustache.render(template, cities);
+                let text = Mustache.render(template, cities);
 
-                    $("#mypanel").html(text);
-                });
-                } catch (e) {
-                alert('error');
-            }
+                $("#mypanel").html(text);
+
+            })
+                .error(function () {alert('error')});
         });
     });
 </script>
