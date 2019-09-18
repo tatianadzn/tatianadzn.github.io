@@ -38,18 +38,15 @@
 </script>
 
 <div id="mypanel"></div>
+<div id="forErrors"></div>
 
 <script>
-    let city = 'London';
-</script>
 
-
-<script>
     $(function find () {
 
         $("#btn").on('click', function () {
 
-            city = document.getElementById('cityName').value;
+            let city = document.getElementById('cityName').value;
 
             $.getJSON('https://api.openweathermap.org/data/2.5/weather?appid=f816129477a56b6c0840aa37d1e18cdc&?', {q: city}, function (cities) {
 
@@ -60,7 +57,13 @@
                 $("#mypanel").html(text);
 
             })
-                .error(function () {alert('error')});
+                .fail(function (error) {
+                    if (error = 'Not found'){
+                        document.getElementById('mypanel').innerText = 'City not found';
+                    }
+                    else
+                        document.getElementById('mypanel').innerText = 'Server error';
+                })
         });
     });
 </script>
