@@ -38,7 +38,6 @@
 </script>
 
 <div id="mypanel"></div>
-<div id="forErrors"></div>
 
 <script>
 
@@ -58,11 +57,12 @@
 
             })
                 .fail(function (error) {
-                    if (error = 'Not found'){
+                    if (error === 'Not found'){
                         document.getElementById('mypanel').innerText = 'City not found';
                     }
-                    else
+                    else {
                         document.getElementById('mypanel').innerText = 'Server error';
+                    }
                 })
         });
     });
