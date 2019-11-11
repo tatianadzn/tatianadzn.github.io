@@ -1,3 +1,5 @@
+import '../styles.sass';
+
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?appid=41210752a269dfb2e2a8167a0910c3a1&?';
 
 const template = '<table><thead><tr><th>City</th><th>Temp</th><th>Humidity</th>' +
@@ -5,10 +7,17 @@ const template = '<table><thead><tr><th>City</th><th>Temp</th><th>Humidity</th>'
     '<td>{{main.temp}}</td><td>{{main.humidity}}</td><td>{{wind.speed}}</td>' +
     '<td>{{main.pressure}}</td></tr></tbody></table>';
 
+
+document.getElementById('form').onsubmit = (event) => {
+    handleSubmit(event);
+};
+
+
 function handleSubmit (e) {
     e.preventDefault();
-    let city = document.getElementById('cityName').value;
+    let city = e.target.cityName.value;
     fetchData(city);
+    e.target.cityName.value = '';
 }
 
 function fetchData(city) {

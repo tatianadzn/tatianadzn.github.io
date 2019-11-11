@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="styles.css">
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<form onsubmit="handleSubmit(event)">
+<form id='form' onsubmit="handleSubmit(event)">
     <input type="text" name="cityName" id="cityName">
     <button type="submit">Find</button>
 </form>
 
-<div id="root"></div>
+<div id="root">Here will be table with fetched data</div>
 
 </body>
 </html>

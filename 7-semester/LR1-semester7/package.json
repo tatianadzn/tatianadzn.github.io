@@ -2,12 +2,25 @@
   "name": "LR1-semester7",
   "version": "1.0.0",
   "description": "1. Install SASS\r npm install -g sass",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
-    "jquery": "^3.4.1"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^3.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
