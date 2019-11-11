@@ -1,0 +1,16 @@
+{
+  "name": "LR1-semester7",
+  "version": "1.0.0",
+  "description": "1. Install SASS\r npm install -g sass",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
