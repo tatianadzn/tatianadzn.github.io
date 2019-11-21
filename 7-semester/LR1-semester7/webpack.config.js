@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpa
 
 module.exports = {
     context: __dirname,
-    entry: ["./public/index.html", "./src/index.js"], // webpack entry point. Module to start building dependency graph
+    entry: ["./public/index.html", "./src/index.js", "./styles.sass"], // webpack entry point. Module to start building dependency graph
     output: {
         path: __dirname + '/public/dist', // Folder to store generated bundle
         filename: 'bundle.js',  // Name of generated bundle after build
