@@ -8,7 +8,10 @@ export const load = async function(url, callback) {
 export const fetchData = async function (url) {
     const response = await fetch(url);
     if (response.ok){
-        let data = await response.json();
+        let data = {};
+        if (response.body !== null) {
+            data = await response.json();
+        }
         return {'success': true, data: data};
     }
     else{
